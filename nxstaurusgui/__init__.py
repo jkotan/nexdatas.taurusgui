@@ -27,65 +27,98 @@ GUI for taurusgui
 __version__ = "1.0.0"
 
 
-from config import *
 from  . import serverinfo
 from  . import config
-import xml
+from xml.dom import minidom
 import tempfile
+import PyTango
+
 
 def replaceText(node, text):
     if node.firstChild.nodeType == node.TEXT_NODE:
         node.firstChild.replaceWholeText(text)
-            
 
-def changeXML():
-    with open(config.XML_CONFIG, 'r') as content_file:
+def findDevices():
+    db = PyTango.Database()
+    if not serverinfo.SELECTORSERVER_NAME:
+        dvs = db.get_device_exported_for_class("NXSRecSelector")
+
+        for dv in dvs:
+            try:
+                dp = PyTango.DeviceProxy(dv)
+                dp.ping()
+                if not serverinfo.DOOR_NAME:
+                    serverinfo.DOOR_NAME = dp.Door
+                serverinfo.SELECTORSERVER_NAME = dv
+                break
+            except:
+                pass
+    elif not serverinfo.DOOR_NAME:
+        try:
+            dp = PyTango.DeviceProxy(serverinfo.SELECTORSERVER_NAME)
+            dp.ping()
+            serverinfo.DOOR_NAME = dp.Door
+        except:
+            pass
+    
+    if not serverinfo.SELECTORSERVER_NAME:
+        serverinfo.SELECTORSERVER_NAME ='module'
+    elif not serverinfo.MACROSERVER_NAME:
+        dvs = db.get_device_exported_for_class("MacroServer")
+        for dv in dvs:
+            try:
+                dp = PyTango.DeviceProxy(dv)
+                dp.ping()
+                dl = dp.DoorList
+                if serverinfo.DOOR_NAME in dl:
+                    serverinfo.MACROSERVER_NAME = dv
+                    break
+            except:
+                pass
+
+
+        
+
+def changeXML(ifile):
+    with open(ifile, 'r') as content_file:
         xmlstring = content_file.read()
-    print "S1", xmlstring
     indom = None
+    findDevices()
     if serverinfo.SELECTORSERVER_NAME:
-        if not indom:
-            indom = xml.dom.minidom.parseString(xmlstring)
+        if not indom:    
+            indom = minidom.parseString(xmlstring)
         modelnode = indom.getElementsByTagName("model")
         if modelnode:
             replaceText(modelnode[0], serverinfo.SELECTORSERVER_NAME)
-            
     if serverinfo.DOOR_NAME:
-        if not indom:
-            indom = xml.dom.minidom.parseString(xmlstring)
+        if not indom:    
+            indom = minidom.parseString(xmlstring)
         doornode = indom.getElementsByTagName("DOOR_NAME")
         if doornode:
             replaceText(doornode[0], serverinfo.DOOR_NAME)
     if serverinfo.MACROSERVER_NAME:
-        if not indom:
-            indom = xml.dom.minidom.parseString(xmlstring)
+        if not indom:    
+            indom = minidom.parseString(xmlstring)
         macronode = indom.getElementsByTagName("MACROSERVER_NAME")
         if macronode:
-            replaceText(macronode[0], serverinfo.DOOR_NAME)
-    if indom:
+            replaceText(macronode[0], serverinfo.MACROSERVER_NAME)
+    if indom:        
         clxml = indom.toxml()
-        f = tempfile.NamedTemporaryFile(delete=False)
+        if serverinfo.TMPFILE:
+            f = open(serverinfo.TMPFILE, 'w')    
+        else:
+            f = tempfile.NamedTemporaryFile(delete=False)
         f.write(clxml)
-        print clxml
+#        print "TEMPORARY", clxml
         f.close()
+        serverinfo.TMPFILE = f.name
         return f.name
 
-print "MC2", serverinfo.MACROSERVER_NAME
-print "DR2", serverinfo.DOOR_NAME
-print "SL2", serverinfo.SELECTORSERVER_NAME
+if serverinfo.FIND:
+    newfile = changeXML('%s/data/config.xml' % __path__[0])
+    if newfile:
+        config.XML_CONFIG = newfile
 
-#config.XML_CONFIG_DIR = '.'
-if __path__:
-    config.XML_CONFIG_DIR =  __path__[0]
-print "PATH", config.XML_CONFIG_DIR
-
-config.XML_CONFIG = '%s/data/config.xml' % config.XML_CONFIG_DIR
-print "CXONF", config.XML_CONFIG
-newfile = changeXML()
-if newfile:
-    print newfile
-    config.XML_CONFIG = newfile
-print "CONFIG", config.XML_CONFIG
-
+from config import *
 
 

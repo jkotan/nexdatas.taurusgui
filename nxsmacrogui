@@ -48,15 +48,10 @@ def remove_option(sopt, lopt):
     if pos is not None:
         if not single and len(sys.argv)  > pos:
             w = sys.argv.pop(pos + 1 )
-            print "removed2", w
         w = sys.argv.pop(pos)
-        print "removed", w
-    print "sopt", sopt, lopt, pos    
-    print sys.argv    
+
 
 def main():
-
-
     import taurus.core.util.argparse
     parser = taurus.core.util.argparse.get_taurus_parser()
     
@@ -66,18 +61,9 @@ def main():
     parser.add_option(
         "-d", "--door", dest="door",
         help="door device name")
-    parser.add_option(
-        "-m", "--macroserver", dest="macroserver",
-        help="macroserver device name")
-
-
-
 
     (options, _) = parser.parse_args()
     
-    if options.macroserver:
-        serverinfo.MACROSERVER_NAME = options.macroserver
-        remove_option("-m", "--macroserver")
     if options.door:
         serverinfo.DOOR_NAME = options.door
         remove_option("-d", "--door")
@@ -85,16 +71,17 @@ def main():
         serverinfo.SELECTORSERVER_NAME = options.server
         remove_option("-s", "--server")
         
-
-
     import sys
     sys.argv.insert(1, 'nxstaurusgui')
-    
     from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
+    try:
+        serverinfo.FIND = True
+        tmain()
+    finally:
+#        print serverinfo.TMPFILE
+        if serverinfo.TMPFILE and os.path.exists(serverinfo.TMPFILE):
+            os.remove(serverinfo.TMPFILE)
     
-    tmain()
-
-
 if __name__ == "__main__":
     main()
 

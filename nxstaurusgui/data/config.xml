@@ -3,8 +3,8 @@
   <ORGANIZATION>DESY</ORGANIZATION>
   <ORGANIZATION_LOGO>./image/desylogo.png</ORGANIZATION_LOGO>
   <CUSTOM_LOGO/>
-  <MACROSERVER_NAME>p09/macroserver/haso228k.01</MACROSERVER_NAME>
-  <DOOR_NAME>p09/door/haso228k.01</DOOR_NAME> 
+  <MACROSERVER_NAME>macroserver</MACROSERVER_NAME>
+  <DOOR_NAME>door</DOOR_NAME> 
   <INSTRUMENTS_FROM_POOL>False</INSTRUMENTS_FROM_POOL>
   <PanelDescriptions>
     <PanelDescription>
@@ -19,7 +19,7 @@
 	<item datauid="expConfChanged" slotName="resetConfiguration" />
 	<item datauid="doorName" slotName="updateDoorName" />
       </sharedDataRead>
-      <model>p09/nxsrecselector/r228</model>
+      <model>module</model>
     </PanelDescription>
   </PanelDescriptions>
 </taurusgui_config>
