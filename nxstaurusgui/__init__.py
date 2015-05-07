@@ -27,8 +27,8 @@ GUI for taurusgui
 __version__ = "1.0.0"
 
 
-from  . import serverinfo
-from  . import config
+from . import serverinfo
+from . import config
 from xml.dom import minidom
 import tempfile
 import PyTango
@@ -38,7 +38,9 @@ def replaceText(node, text):
     if node.firstChild.nodeType == node.TEXT_NODE:
         node.firstChild.replaceWholeText(text)
 
+
 def findDevices():
+    print "FINDCHANGE"
     db = PyTango.Database()
     if not serverinfo.SELECTORSERVER_NAME:
         dvs = db.get_device_exported_for_class("NXSRecSelector")
@@ -60,9 +62,9 @@ def findDevices():
             serverinfo.DOOR_NAME = dp.Door
         except:
             pass
-    
+
     if not serverinfo.SELECTORSERVER_NAME:
-        serverinfo.SELECTORSERVER_NAME ='module'
+        serverinfo.SELECTORSERVER_NAME = 'module'
     elif not serverinfo.MACROSERVER_NAME:
         dvs = db.get_device_exported_for_class("MacroServer")
         for dv in dvs:
@@ -77,48 +79,45 @@ def findDevices():
                 pass
 
 
-        
-
 def changeXML(ifile):
     with open(ifile, 'r') as content_file:
         xmlstring = content_file.read()
     indom = None
     findDevices()
     if serverinfo.SELECTORSERVER_NAME:
-        if not indom:    
+        if not indom:
             indom = minidom.parseString(xmlstring)
         modelnode = indom.getElementsByTagName("model")
         if modelnode:
             replaceText(modelnode[0], serverinfo.SELECTORSERVER_NAME)
     if serverinfo.DOOR_NAME:
-        if not indom:    
+        if not indom:
             indom = minidom.parseString(xmlstring)
         doornode = indom.getElementsByTagName("DOOR_NAME")
         if doornode:
             replaceText(doornode[0], serverinfo.DOOR_NAME)
     if serverinfo.MACROSERVER_NAME:
-        if not indom:    
+        if not indom:
             indom = minidom.parseString(xmlstring)
         macronode = indom.getElementsByTagName("MACROSERVER_NAME")
         if macronode:
             replaceText(macronode[0], serverinfo.MACROSERVER_NAME)
-    if indom:        
+    if indom:
         clxml = indom.toxml()
         if serverinfo.TMPFILE:
-            f = open(serverinfo.TMPFILE, 'w')    
+            f = open(serverinfo.TMPFILE, 'w')
         else:
             f = tempfile.NamedTemporaryFile(delete=False)
         f.write(clxml)
-#        print "TEMPORARY", clxml
         f.close()
         serverinfo.TMPFILE = f.name
         return f.name
+
 
 if serverinfo.FIND:
     newfile = changeXML('%s/data/config.xml' % __path__[0])
     if newfile:
         config.XML_CONFIG = newfile
 
+
 from config import *
-
-

@@ -3,4 +3,3 @@ DOOR_NAME = None
 SELECTORSERVER_NAME = None
 FIND = None
 TMPFILE = None
-

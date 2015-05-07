@@ -72,18 +72,14 @@ def main():
         remove_option("-s", "--server")
         
     import sys
-    sys.argv.insert(1, 'nxstaurusgui')
+    sys.argv.insert(1, str(nxstaurusgui.__path__[0]))
     from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
     try:
         serverinfo.FIND = True
         tmain()
     finally:
-#        print serverinfo.TMPFILE
         if serverinfo.TMPFILE and os.path.exists(serverinfo.TMPFILE):
             os.remove(serverinfo.TMPFILE)
     
 if __name__ == "__main__":
     main()
-
-
-
