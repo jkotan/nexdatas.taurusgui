@@ -3,15 +3,12 @@
   <ORGANIZATION>DESY</ORGANIZATION>
   <ORGANIZATION_LOGO>data/desylogo.png</ORGANIZATION_LOGO>
   <CUSTOM_LOGO/>
-  <MACROSERVER_NAME>macroserver</MACROSERVER_NAME>
-  <DOOR_NAME>door</DOOR_NAME> 
-  <INSTRUMENTS_FROM_POOL>False</INSTRUMENTS_FROM_POOL>
   <PanelDescriptions>
     <PanelDescription>
       <name>NXSelector</name>
       <classname>Selector</classname>
       <modulename>nxselector.Selector</modulename>
-      <floating>True</floating>
+      <floating>False</floating>
       <sharedDataWrite>
 	<item datauid="expConfChanged" signalName="experimentConfigurationChanged" />
       </sharedDataWrite>
@@ -22,4 +19,7 @@
       <model>module</model>
     </PanelDescription>
   </PanelDescriptions>
+  <MACROSERVER_NAME>macroserver</MACROSERVER_NAME>
+  <DOOR_NAME>door</DOOR_NAME> 
+  <INSTRUMENTS_FROM_POOL>False</INSTRUMENTS_FROM_POOL>
 </taurusgui_config>
