@@ -40,7 +40,6 @@ def replaceText(node, text):
 
 
 def findDevices():
-    print "FINDCHANGE"
     db = PyTango.Database()
     if not serverinfo.SELECTORSERVER_NAME:
         dvs = db.get_device_exported_for_class("NXSRecSelector")

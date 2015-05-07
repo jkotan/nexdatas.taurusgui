@@ -1,7 +1,7 @@
 <taurusgui_config>
   <GUI_NAME>Experiment Control Panel</GUI_NAME>
   <ORGANIZATION>DESY</ORGANIZATION>
-  <ORGANIZATION_LOGO>./image/desylogo.png</ORGANIZATION_LOGO>
+  <ORGANIZATION_LOGO>data/desylogo.png</ORGANIZATION_LOGO>
   <CUSTOM_LOGO/>
   <MACROSERVER_NAME>macroserver</MACROSERVER_NAME>
   <DOOR_NAME>door</DOOR_NAME> 
