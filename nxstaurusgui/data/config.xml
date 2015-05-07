@@ -1,0 +1,25 @@
+<taurusgui_config>
+  <GUI_NAME>Experiment Control Panel</GUI_NAME>
+  <ORGANIZATION>DESY</ORGANIZATION>
+  <ORGANIZATION_LOGO>./image/desylogo.png</ORGANIZATION_LOGO>
+  <CUSTOM_LOGO/>
+  <MACROSERVER_NAME>p09/macroserver/haso228k.01</MACROSERVER_NAME>
+  <DOOR_NAME>p09/door/haso228k.01</DOOR_NAME> 
+  <INSTRUMENTS_FROM_POOL>False</INSTRUMENTS_FROM_POOL>
+  <PanelDescriptions>
+    <PanelDescription>
+      <name>NXSelector</name>
+      <classname>Selector</classname>
+      <modulename>nxselector.Selector</modulename>
+      <floating>True</floating>
+      <sharedDataWrite>
+	<item datauid="expConfChanged" signalName="experimentConfigurationChanged" />
+      </sharedDataWrite>
+      <sharedDataRead>
+	<item datauid="expConfChanged" slotName="resetConfiguration" />
+	<item datauid="doorName" slotName="updateDoorName" />
+      </sharedDataRead>
+      <model>p09/nxsrecselector/r228</model>
+    </PanelDescription>
+  </PanelDescriptions>
+</taurusgui_config>
