@@ -24,7 +24,7 @@ GUI for taurusgui
 """
 
 ## version of the application
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 from . import serverinfo
@@ -64,7 +64,19 @@ def findDevices():
 
     if not serverinfo.SELECTORSERVER_NAME:
         serverinfo.SELECTORSERVER_NAME = 'module'
-    elif not serverinfo.MACROSERVER_NAME:
+    if not serverinfo.DOOR_NAME:
+        dvs = db.get_device_exported_for_class("Door")
+
+        for dv in dvs:
+            try:
+                dp = PyTango.DeviceProxy(dv)
+                dp.ping()
+                serverinfo.DOOR_NAME = dv
+                break
+            except:
+                pass
+        
+    if not serverinfo.MACROSERVER_NAME:
         dvs = db.get_device_exported_for_class("MacroServer")
         for dv in dvs:
             try:
