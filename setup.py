@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2014-2015 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2014-2016 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxselector nexdatas
+## \package nxstaurusgui nexdatas
 ## \file setup.py
 # GUI for setting NeXus Sardana Recorder
 

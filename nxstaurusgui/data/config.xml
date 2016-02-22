@@ -7,7 +7,7 @@
     <PanelDescription>
       <name>NXSelector</name>
       <classname>Selector</classname>
-      <modulename>nxselector.Selector</modulename>
+      <modulename>nxsselector.Selector</modulename>
       <floating>False</floating>
       <sharedDataWrite>
 	<item datauid="expConfChanged" signalName="experimentConfigurationChanged" />

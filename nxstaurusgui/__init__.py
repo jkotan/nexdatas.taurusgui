@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2014-2015 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2014-2016 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \package nxsmacrogui nexdatas
-## \file nxselector/__init__.py
+## \file nxstaurusgui/__init__.py
 # package constructor
 
 """ --- NXS MacroGUI --
@@ -113,6 +113,17 @@ def changeXML(ifile):
         macronode = indom.getElementsByTagName("MACROSERVER_NAME")
         if macronode:
             replaceText(macronode[0], serverinfo.MACROSERVER_NAME)
+    try:
+        import nxsselector
+    except ImportError:
+        try:
+            import nxselector
+            modulename = indom.getElementsByTagName("modulename")
+            if modulename:
+                replaceText(modulename[0], "nxselector.Selector")
+        except ImportError:
+            import nxsselector
+
     if indom:
         clxml = indom.toxml()
         if serverinfo.TMPFILE:
