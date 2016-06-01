@@ -15,16 +15,14 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxsmacrogui nexdatas
-## \file nxstaurusgui/__init__.py
-# package constructor
+#
 
 """ --- NXS MacroGUI --
 GUI for taurusgui
 """
 
-## version of the application
-__version__ = "1.1.0"
+#: version of the application
+__version__ = "1.1.1"
 
 
 from . import serverinfo
@@ -75,7 +73,7 @@ def findDevices():
                 break
             except:
                 pass
-        
+
     if not serverinfo.MACROSERVER_NAME:
         dvs = db.get_device_exported_for_class("MacroServer")
         for dv in dvs:

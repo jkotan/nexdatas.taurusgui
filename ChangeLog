@@ -1,3 +1,7 @@
+2016-06-01 Jan Kotanski <jankotan@gmail.com>
+	* add doorName signal into share data
+	* tagged as 1.1.1
+
 2016-02-22 Jan Kotanski <jankotan@gmail.com>
 	* change from nxselector to nxsselector
 	* tagged as 1.1.0

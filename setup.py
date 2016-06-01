@@ -15,11 +15,9 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxstaurusgui nexdatas
-## \file setup.py
-# GUI for setting NeXus Sardana Recorder
+# 
 
-""" setup.py for NXS Component Designer """
+""" setup.py for setting NeXus MacroGUI """
 
 import os
 import sys
@@ -30,26 +28,37 @@ from distutils.command.clean import clean
 from distutils.command.install_scripts import install_scripts
 import shutil
 
-## package name
+#: package name
 TOOL = "nxstaurusgui"
-## package instance
+#: package instance
 ITOOL = __import__(TOOL)
 
 
 DATADIR = os.path.join(TOOL, "data")
 
-## reading a file
+from sphinx.setup_command import BuildDoc
+
+
 def read(fname):
+    """ read the file 
+
+    :param fname: readme file name
+    """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+#: scripts
 SCRIPTS = ['nxsmacrogui']
 
-
+#: package data
 package_data = {'nxstaurusgui': ['data/desylogo.png', 'data/config.xml']
                 }
 
+release = ITOOL.__version__
+version = ".".join(release.split(".")[:2])
+name = "NXSConfigServer"
 
-## metadata for distutils
+
+#: metadata for distutils
 SETUPDATA = dict(
     name="nxstaurusgui",
     version=ITOOL.__version__,
@@ -59,14 +68,19 @@ SETUPDATA = dict(
     maintainer_email="jankotan@gmail.com",
     description=("NXSelector MacroGUI for taurusgui"),
     license=read('COPYRIGHT'),
-#    license="GNU GENERAL PUBLIC LICENSE, version 3",
     keywords="configuration scan nexus sardana recorder tango component data",
     url="https://github.com/jkotan/nexdatas",
     platforms=("Linux", " Windows", " MacOS "),
     packages=[TOOL, DATADIR],
     scripts=SCRIPTS,
     package_data=package_data,
-    long_description=read('README'),
+    cmdclass={'build_sphinx': BuildDoc},
+    command_options={
+        'build_sphinx': {
+            'project': ('setup.py', name),
+            'version': ('setup.py', version),
+            'release': ('setup.py', release)}},
+    long_description=read('README.rst')
 )
 
 

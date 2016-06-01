@@ -11,6 +11,7 @@
       <floating>False</floating>
       <sharedDataWrite>
 	<item datauid="expConfChanged" signalName="experimentConfigurationChanged" />
+	<item datauid="doorName" signalName="doorName" />
       </sharedDataWrite>
       <sharedDataRead>
 	<item datauid="expConfChanged" slotName="resetConfiguration" />
