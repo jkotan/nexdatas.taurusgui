@@ -1,4 +1,8 @@
 2016-06-01 Jan Kotanski <jankotan@gmail.com>
+	* add TaurusValueHB
+	* tagged as 1.2.0
+
+2016-06-01 Jan Kotanski <jankotan@gmail.com>
 	* add doorName signal into share data
 	* tagged as 1.1.1
 
