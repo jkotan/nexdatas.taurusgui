@@ -5,6 +5,11 @@
 
 .. include:: ../README.rst
 
+.. toctree::
+   :maxdepth: 4
+
+	      
+   nxstaurusgui
 	     
 Indices and tables
 ==================
