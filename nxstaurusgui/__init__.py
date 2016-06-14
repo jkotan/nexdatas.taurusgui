@@ -22,7 +22,7 @@ GUI for taurusgui
 """
 
 #: version of the application
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 
 
 from . import serverinfo
