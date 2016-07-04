@@ -27,7 +27,7 @@ From sources
 
 Download the latest version of NeXuS Configuration Server from
 
-    https://github.com/jkotan/nexdatas/taurusgui/
+    https://github.com/nexdatas/taurusgui/
 
 Extract the sources and run
 
