@@ -1,5 +1,0 @@
-include README.rst
-include COPYRIGHT
-include man/nxsmacrogui.1
-include nxstaurusgui/data/desylogo.png
-include nxstaurusgui/data/config.xml

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>nxstaurusgui &mdash; NXSConfigServer 1.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="NXSConfigServer 1.2.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for nxstaurusgui</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c">#   This file is part of nexdatas - Tango Server for NeXus data writer</span>
+<span class="c">#</span>
+<span class="c">#    Copyright (C) 2014-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;</span>
+<span class="c">#</span>
+<span class="c">#    nexdatas is free software: you can redistribute it and/or modify</span>
+<span class="c">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c">#    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#    (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#    nexdatas is distributed in the hope that it will be useful,</span>
+<span class="c">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#    GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#    You should have received a copy of the GNU General Public License</span>
+<span class="c">#    along with nexdatas.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+
+<span class="sd">&quot;&quot;&quot; --- NXS MacroGUI --</span>
+<span class="sd">GUI for taurusgui</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#: version of the application</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s">&quot;1.2.0&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">serverinfo</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">xml.dom</span> <span class="kn">import</span> <span class="n">minidom</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">PyTango</span>
+
+
+<div class="viewcode-block" id="replaceText"><a class="viewcode-back" href="../nxstaurusgui.html#nxstaurusgui.replaceText">[docs]</a><span class="k">def</span> <span class="nf">replaceText</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">nodeType</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">TEXT_NODE</span><span class="p">:</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">firstChild</span><span class="o">.</span><span class="n">replaceWholeText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="findDevices"><a class="viewcode-back" href="../nxstaurusgui.html#nxstaurusgui.findDevices">[docs]</a><span class="k">def</span> <span class="nf">findDevices</span><span class="p">():</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">Database</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span><span class="p">:</span>
+        <span class="n">dvs</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_device_exported_for_class</span><span class="p">(</span><span class="s">&quot;NXSRecSelector&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">dvs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dp</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="n">dv</span><span class="p">)</span>
+                <span class="n">dp</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span><span class="p">:</span>
+                    <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">Door</span>
+                <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span> <span class="o">=</span> <span class="n">dv</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dp</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span><span class="p">)</span>
+            <span class="n">dp</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+            <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">Door</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span><span class="p">:</span>
+        <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span> <span class="o">=</span> <span class="s">&#39;module&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span><span class="p">:</span>
+        <span class="n">dvs</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_device_exported_for_class</span><span class="p">(</span><span class="s">&quot;Door&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">dvs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dp</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="n">dv</span><span class="p">)</span>
+                <span class="n">dp</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+                <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span> <span class="o">=</span> <span class="n">dv</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">MACROSERVER_NAME</span><span class="p">:</span>
+        <span class="n">dvs</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_device_exported_for_class</span><span class="p">(</span><span class="s">&quot;MacroServer&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">dvs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dp</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="n">dv</span><span class="p">)</span>
+                <span class="n">dp</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+                <span class="n">dl</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">DoorList</span>
+                <span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
+                    <span class="n">serverinfo</span><span class="o">.</span><span class="n">MACROSERVER_NAME</span> <span class="o">=</span> <span class="n">dv</span>
+                    <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="changeXML"><a class="viewcode-back" href="../nxstaurusgui.html#nxstaurusgui.changeXML">[docs]</a><span class="k">def</span> <span class="nf">changeXML</span><span class="p">(</span><span class="n">ifile</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ifile</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">content_file</span><span class="p">:</span>
+        <span class="n">xmlstring</span> <span class="o">=</span> <span class="n">content_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">indom</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">findDevices</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">indom</span><span class="p">:</span>
+            <span class="n">indom</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">xmlstring</span><span class="p">)</span>
+        <span class="n">modelnode</span> <span class="o">=</span> <span class="n">indom</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">modelnode</span><span class="p">:</span>
+            <span class="n">replaceText</span><span class="p">(</span><span class="n">modelnode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">SELECTORSERVER_NAME</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">indom</span><span class="p">:</span>
+            <span class="n">indom</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">xmlstring</span><span class="p">)</span>
+        <span class="n">doornode</span> <span class="o">=</span> <span class="n">indom</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;DOOR_NAME&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">doornode</span><span class="p">:</span>
+            <span class="n">replaceText</span><span class="p">(</span><span class="n">doornode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">DOOR_NAME</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">MACROSERVER_NAME</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">indom</span><span class="p">:</span>
+            <span class="n">indom</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">xmlstring</span><span class="p">)</span>
+        <span class="n">macronode</span> <span class="o">=</span> <span class="n">indom</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;MACROSERVER_NAME&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">macronode</span><span class="p">:</span>
+            <span class="n">replaceText</span><span class="p">(</span><span class="n">macronode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">MACROSERVER_NAME</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">nxsselector</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">nxselector</span>
+            <span class="n">modulename</span> <span class="o">=</span> <span class="n">indom</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;modulename&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">modulename</span><span class="p">:</span>
+                <span class="n">replaceText</span><span class="p">(</span><span class="n">modulename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;nxselector.Selector&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">nxsselector</span>
+
+    <span class="k">if</span> <span class="n">indom</span><span class="p">:</span>
+        <span class="n">clxml</span> <span class="o">=</span> <span class="n">indom</span><span class="o">.</span><span class="n">toxml</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">TMPFILE</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">serverinfo</span><span class="o">.</span><span class="n">TMPFILE</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">clxml</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">serverinfo</span><span class="o">.</span><span class="n">TMPFILE</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+
+</div>
+<span class="k">if</span> <span class="n">serverinfo</span><span class="o">.</span><span class="n">FIND</span><span class="p">:</span>
+    <span class="n">newfile</span> <span class="o">=</span> <span class="n">changeXML</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/data/config.xml&#39;</span> <span class="o">%</span> <span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">newfile</span><span class="p">:</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">XML_CONFIG</span> <span class="o">=</span> <span class="n">newfile</span>
+
+
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+
+GNU GENERAL PUBLIC LICENSE, version 3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

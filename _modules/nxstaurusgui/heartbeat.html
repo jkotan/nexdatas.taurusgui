@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>nxstaurusgui.heartbeat &mdash; NXSConfigServer 1.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="NXSConfigServer 1.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="nxstaurusgui" href="../nxstaurusgui.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../nxstaurusgui.html" accesskey="U">nxstaurusgui</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for nxstaurusgui.heartbeat</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">taurus.qt.qtgui.panel.taurusvalue</span> <span class="kn">import</span> <span class="n">TaurusValue</span>
+
+
+<div class="viewcode-block" id="TaurusValueHB"><a class="viewcode-back" href="../../nxstaurusgui.html#nxstaurusgui.heartbeat.TaurusValueHB">[docs]</a><span class="k">class</span> <span class="nc">TaurusValueHB</span><span class="p">(</span><span class="n">TaurusValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; TaurusValue widget with Heartbeat events</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">designMode</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">customWidgetMap</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; consturctor</span>
+
+<span class="sd">        :param parent: parent widget</span>
+<span class="sd">        :param designMode: taurus design mode</span>
+<span class="sd">        :param customWidgetMap: (dict&lt;str,Qt.QWidget&gt;) a dictionary whose</span>
+<span class="sd">                                keys are device class strings </span>
+<span class="sd">                                (see :class:`PyTango.DeviceInfo`) and</span>
+<span class="sd">                                whose values are widget classes to be used</span>
+<span class="sd">        :param period: heartbeat period</span>
+<span class="sd">        :param attr: tango device attribute name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">TaurusValue</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">designMode</span><span class="p">,</span> <span class="n">customWidgetMap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attr</span> <span class="o">=</span> <span class="n">attr</span> <span class="ow">or</span> <span class="s">&#39;position&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setEventBufferPeriod</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TaurusValueHB.setModel"><a class="viewcode-back" href="../../nxstaurusgui.html#nxstaurusgui.heartbeat.TaurusValueHB.setModel">[docs]</a>    <span class="k">def</span> <span class="nf">setModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;sets the widget model</span>
+
+<span class="sd">        :param model: tango device name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">TaurusValue</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../nxstaurusgui.html" >nxstaurusgui</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+
+GNU GENERAL PUBLIC LICENSE, version 3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
