@@ -10,7 +10,7 @@ NXS TaurusGUI is taurusgui Configuration for Component Selector
 
 
 | Source code: https://github.com/nexdatas/taurusgui/
-| Web page: http://www.desy.de/~jkotan/nxstaurusgui/
+| Web page: https://nexdatas.github.io/taurusgui/
 
 
 
