@@ -11,6 +11,7 @@ NXS TaurusGUI is taurusgui Configuration for Component Selector
 
 | Source code: https://github.com/nexdatas/taurusgui/
 | Web page: https://nexdatas.github.io/taurusgui/
+| NexDaTaS Web page: https://nexdatas.github.io
 
 
 
@@ -20,14 +21,14 @@ Installation
 
 Install the dependencies:
 
-    Sardana, PyTango, sphinx, Taurus, NXSRecSelector, Selector
+|    Sardana, PyTango, sphinx, Taurus, NXSRecSelector, Selector
 
 From sources
 ^^^^^^^^^^^^
 
 Download the latest version of NeXuS Configuration Server from
 
-    https://github.com/nexdatas/taurusgui/
+|    https://github.com/nexdatas/taurusgui/
 
 Extract the sources and run
 
