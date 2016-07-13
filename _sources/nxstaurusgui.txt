@@ -12,8 +12,6 @@ nxstaurusgui.heartbeat module
     :undoc-members:
     :show-inheritance:
 
-nxstaurusgui
-
 Module contents
 ---------------
 

@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,8 +7,11 @@
     
     <title>nxstaurusgui package &mdash; NXSConfigServer 1.2.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,29 +25,66 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="NXSConfigServer 1.2.0 documentation" href="index.html" />
-    <link rel="prev" title="Welcome to nxstaurusgui’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to nxstaurusgui’s documentation!" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
   </head>
   <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to nxstaurusgui’s documentation!"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          NXSConfigServer</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">nxstaurusgui package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nxstaurusgui.heartbeat">nxstaurusgui.heartbeat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nxstaurusgui">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">nxstaurusgui package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-nxstaurusgui.heartbeat">nxstaurusgui.heartbeat module</a></li>
@@ -53,36 +92,42 @@
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to nxstaurusgui&#8217;s documentation!</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/nxstaurusgui.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
+</ul>
+</li>
+              
             
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Welcome to nxstaurusgui’s documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to nxsta...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
   <div class="section" id="nxstaurusgui-package">
 <h1>nxstaurusgui package<a class="headerlink" href="#nxstaurusgui-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
@@ -95,6 +140,25 @@
 <em class="property">class </em><tt class="descclassname">nxstaurusgui.heartbeat.</tt><tt class="descname">TaurusValueHB</tt><big>(</big><em>parent=None</em>, <em>designMode=False</em>, <em>customWidgetMap=None</em>, <em>period=1000</em>, <em>attr=None</em><big>)</big><a class="reference internal" href="_modules/nxstaurusgui/heartbeat.html#TaurusValueHB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxstaurusgui.heartbeat.TaurusValueHB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">taurus.qt.qtgui.panel.taurusvalue.TaurusValue</span></tt></p>
 <p>TaurusValue widget with Heartbeat events</p>
+<p>consturctor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> (<tt class="xref py py-class docutils literal"><span class="pre">taurus.external.qt.Qt.QWidget</span></tt>) &#8211; parent widget</li>
+<li><strong>designMode</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; taurus design mode</li>
+<li><strong>customWidgetMap</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a> ,
+<tt class="xref py py-class docutils literal"><span class="pre">taurus.external.qt.Qt.QWidget</span></tt> &gt;) &#8211; dictionary whose keys are device class strings
+(see <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/miscellaneous.html#PyTango.DeviceInfo" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.DeviceInfo</span></tt></a>) and
+whose values are widget classes to be used</li>
+<li><strong>period</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">int</span></tt></a>) &#8211; heartbeat period</li>
+<li><strong>attr</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; tango device attribute name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="nxstaurusgui.heartbeat.TaurusValueHB.setModel">
 <tt class="descname">setModel</tt><big>(</big><em>model</em><big>)</big><a class="reference internal" href="_modules/nxstaurusgui/heartbeat.html#TaurusValueHB.setModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxstaurusgui.heartbeat.TaurusValueHB.setModel" title="Permalink to this definition">¶</a></dt>
@@ -103,7 +167,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> &#8211; tango device name</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; tango device name</td>
 </tr>
 </tbody>
 </table>
@@ -111,7 +175,6 @@
 
 </dd></dl>
 
-<p>nxstaurusgui</p>
 </div>
 <div class="section" id="module-nxstaurusgui">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nxstaurusgui" title="Permalink to this headline">¶</a></h2>
@@ -120,47 +183,63 @@ GUI for taurusgui</p>
 <dl class="function">
 <dt id="nxstaurusgui.changeXML">
 <tt class="descclassname">nxstaurusgui.</tt><tt class="descname">changeXML</tt><big>(</big><em>ifile</em><big>)</big><a class="reference internal" href="_modules/nxstaurusgui.html#changeXML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxstaurusgui.changeXML" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>replace device names from serverinfo in <cite>ifile</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ifile</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; file name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="nxstaurusgui.findDevices">
 <tt class="descclassname">nxstaurusgui.</tt><tt class="descname">findDevices</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/nxstaurusgui.html#findDevices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxstaurusgui.findDevices" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>find NXS and Sardana devices and store them in 
+<tt class="xref py py-class docutils literal"><span class="pre">nxstaurusgui.serverinfo</span></tt></p>
+</dd></dl>
 
 <dl class="function">
 <dt id="nxstaurusgui.replaceText">
 <tt class="descclassname">nxstaurusgui.</tt><tt class="descname">replaceText</tt><big>(</big><em>node</em>, <em>text</em><big>)</big><a class="reference internal" href="_modules/nxstaurusgui.html#replaceText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxstaurusgui.replaceText" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>replace text in the minidom node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<tt class="xref py py-class docutils literal"><span class="pre">xml.dom.mindom.Node</span></tt>) &#8211; minidom node</li>
+<li><strong>text</strong> (new <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; new text</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to nxstaurusgui’s documentation!"
-             >previous</a> |</li>
-        <li><a href="index.html">NXSConfigServer 1.2.0 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
         &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
-GNU GENERAL PUBLIC LICENSE, version 3.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
-    </div>
+GNU GENERAL PUBLIC LICENSE, version 3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>
