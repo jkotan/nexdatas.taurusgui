@@ -33,11 +33,23 @@ import PyTango
 
 
 def replaceText(node, text):
+    """
+    replace text in the minidom node
+
+    :param node: minidom node
+    :type node: :class:`xml.dom.mindom.Node`
+    :param text: new text
+    :type text: new :obj:`str`
+    """
     if node.firstChild.nodeType == node.TEXT_NODE:
         node.firstChild.replaceWholeText(text)
 
 
 def findDevices():
+    """
+    find NXS and Sardana devices and store them in 
+    :class:`nxstaurusgui.serverinfo`
+    """
     db = PyTango.Database()
     if not serverinfo.SELECTORSERVER_NAME:
         dvs = db.get_device_exported_for_class("NXSRecSelector")
@@ -89,6 +101,12 @@ def findDevices():
 
 
 def changeXML(ifile):
+    """
+    replace device names from serverinfo in `ifile`
+    
+    :param ifile: file name
+    :type ifile: :obj:`str`
+    """
     with open(ifile, 'r') as content_file:
         xmlstring = content_file.read()
     indom = None

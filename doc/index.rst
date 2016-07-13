@@ -7,7 +7,6 @@
 
 .. toctree::
    :maxdepth: 4
-
 	      
    nxstaurusgui
 	     
