@@ -55,7 +55,7 @@ package_data = {'nxstaurusgui': ['data/desylogo.png', 'data/config.xml']
 
 release = ITOOL.__version__
 version = ".".join(release.split(".")[:2])
-name = "NXSConfigServer"
+name = "NXS Taurus GUI"
 
 
 #: metadata for distutils
