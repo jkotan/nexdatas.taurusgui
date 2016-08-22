@@ -47,7 +47,7 @@ def replaceText(node, text):
 
 def findDevices():
     """
-    find NXS and Sardana devices and store them in 
+    find NXS and Sardana devices and store them in
     :class:`nxstaurusgui.serverinfo`
     """
     db = PyTango.Database()
@@ -103,7 +103,7 @@ def findDevices():
 def changeXML(ifile):
     """
     replace device names from serverinfo in `ifile`
-    
+
     :param ifile: file name
     :type ifile: :obj:`str`
     """
