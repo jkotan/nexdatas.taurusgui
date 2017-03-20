@@ -51,9 +51,9 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'nxstaurusgui'
-copyright = u'2012-2016 DESY, Jan Kotanski <jkotan@mail.desy.de>' \
+copyright = u'2012-2017 DESY, Jan Kotanski <jkotan@mail.desy.de>' \
             + u'\n\nGNU GENERAL PUBLIC LICENSE, version 3'
-u'2016, Author'
+u'2017, Author'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -364,7 +364,7 @@ texinfo_documents = [
 epub_title = u'nxstaurusgui'
 epub_author = u'Author'
 epub_publisher = u'Author'
-epub_copyright = u'2016, Author'
+epub_copyright = u'2017, Author'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'nxstaurusgui'
@@ -430,7 +430,7 @@ epub_exclude_files = ['search.html']
 autoclass_content = 'both'
 
 intersphinx_mapping = {
-    'http://www.taurus-scada.org/en/3.7.2/' : None,
+    'http://www.taurus-scada.org/en/3.7.3/' : None,
 #    'http://www.taurus-scada.org' : None,
     'http://docs.python.org/2.7/': None,
     'http://docs.scipy.org/doc/scipy/reference': None,
