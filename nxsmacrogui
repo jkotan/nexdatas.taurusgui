@@ -39,7 +39,7 @@ def remove_option(sopt, lopt):
             pos = i
             if ar == sopt:
                 single = False
-            break;    
+            break;
         elif ar.startswith(lopt+'='):
             pos = i
             break;
@@ -50,9 +50,13 @@ def remove_option(sopt, lopt):
 
 
 def main():
+
+    if "GNOME_DESKTOP_SESSION_ID"  not in os.environ:
+        os.environ["GNOME_DESKTOP_SESSION_ID"] = "qtconfig"
+
     import taurus.core.util.argparse
     parser = taurus.core.util.argparse.get_taurus_parser()
-    
+
     parser.add_option(
         "-s", "--server", dest="server",
         help="selector server")
@@ -61,14 +65,14 @@ def main():
         help="door device name")
 
     (options, _) = parser.parse_args()
-    
+
     if options.door:
         serverinfo.DOOR_NAME = options.door
         remove_option("-d", "--door")
     if options.server:
         serverinfo.SELECTORSERVER_NAME = options.server
         remove_option("-s", "--server")
-        
+
     import sys
     sys.argv.insert(1, str(nxstaurusgui.__path__[0]))
     from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
@@ -78,6 +82,6 @@ def main():
     finally:
         if serverinfo.TMPFILE and os.path.exists(serverinfo.TMPFILE):
             os.remove(serverinfo.TMPFILE)
-    
+
 if __name__ == "__main__":
     main()
