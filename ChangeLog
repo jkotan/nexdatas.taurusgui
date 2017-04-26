@@ -1,3 +1,8 @@
+2017-04-26 Jan Kotanski <jankotan@gmail.com>
+	* add AA_X11InitThreads attribute
+	* add support for oxygen
+	* tagged as 1.2.2
+
 2017-03-20 Jan Kotanski <jankotan@gmail.com>
 	* add GNOME_DESKTOP_SESSION_ID
 	* tagged as 1.2.1
