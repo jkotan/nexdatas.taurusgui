@@ -21,10 +21,10 @@
 GUI for taurusgui
 """
 
-from . import magic
+from .magic import find
 from .config import XML_CONFIG_DIR, XML_CONFIG
 
-__all__ = [XML_CONFIG_DIR, XML_CONFIG, magic]
+__all__ = [XML_CONFIG_DIR, XML_CONFIG, find]
 
 #: version of the application
 __version__ = "1.2.2"
