@@ -85,6 +85,7 @@ def main():
     from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
     try:
         serverinfo.FIND = True
+        nxstaurusgui.find()
         tmain()
     finally:
         if serverinfo.TMPFILE and os.path.exists(serverinfo.TMPFILE):
