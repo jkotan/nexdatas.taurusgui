@@ -21,15 +21,15 @@
 GUI for taurusgui
 """
 
-#: version of the application
-__version__ = "1.2.2"
-
-
 from . import serverinfo
 from . import config
 from xml.dom import minidom
 import tempfile
 import PyTango
+
+#: version of the application
+__version__ = "1.2.2"
+
 
 
 def replaceText(node, text):
@@ -156,6 +156,3 @@ if serverinfo.FIND:
     newfile = changeXML('%s/data/config.xml' % __path__[0])
     if newfile:
         config.XML_CONFIG = newfile
-
-
-from config import *
