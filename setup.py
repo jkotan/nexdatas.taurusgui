@@ -15,18 +15,18 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 
 """ setup.py for setting NeXus MacroGUI """
 
 import os
-import sys
-from distutils.util import get_platform
+# import sys
+# from distutils.util import get_platform
 from distutils.core import setup
-from distutils.command.build import build
-from distutils.command.clean import clean
-from distutils.command.install_scripts import install_scripts
-import shutil
+# from distutils.command.build import build
+# from distutils.command.clean import clean
+# from distutils.command.install_scripts import install_scripts
+from sphinx.setup_command import BuildDoc
 
 #: package name
 TOOL = "nxstaurusgui"
@@ -36,15 +36,14 @@ ITOOL = __import__(TOOL)
 
 DATADIR = os.path.join(TOOL, "data")
 
-from sphinx.setup_command import BuildDoc
-
 
 def read(fname):
-    """ read the file 
+    """ read the file
 
     :param fname: readme file name
     """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 #: scripts
 SCRIPTS = ['nxsmacrogui']
@@ -84,9 +83,10 @@ SETUPDATA = dict(
 )
 
 
-## the main function
+# the main function
 def main():
     setup(**SETUPDATA)
+
 
 if __name__ == '__main__':
     main()

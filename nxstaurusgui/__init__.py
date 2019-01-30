@@ -21,15 +21,14 @@
 GUI for taurusgui
 """
 
-#: version of the application
-__version__ = "1.2.2"
-
-
 from . import serverinfo
 from . import config
 from xml.dom import minidom
 import tempfile
 import PyTango
+
+#: version of the application
+__version__ = "1.2.2"
 
 
 def replaceText(node, text):
@@ -130,15 +129,15 @@ def changeXML(ifile):
         if macronode:
             replaceText(macronode[0], serverinfo.MACROSERVER_NAME)
     try:
-        import nxsselector
+        __import__("nxsselector")
     except ImportError:
         try:
-            import nxselector
+            __import__("nxselector")
             modulename = indom.getElementsByTagName("modulename")
             if modulename:
                 replaceText(modulename[0], "nxselector.Selector")
         except ImportError:
-            import nxsselector
+            __import__("nxsselector")
 
     if indom:
         clxml = indom.toxml()
@@ -157,5 +156,8 @@ if serverinfo.FIND:
     if newfile:
         config.XML_CONFIG = newfile
 
+config = __import__("config", globals(), locals(), [], -1)
+XML_CONFIG_DIR, XML_CONFIG = config.XML_CONFIG_DIR, config.XML_CONFIG
+# from config import XML_CONFIG_DIR, XML_CONFIG
 
-from config import *
+__all__ = [XML_CONFIG_DIR, XML_CONFIG]
