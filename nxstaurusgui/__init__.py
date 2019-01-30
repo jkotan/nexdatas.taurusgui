@@ -61,14 +61,14 @@ def findDevices():
                     serverinfo.DOOR_NAME = dp.Door
                 serverinfo.SELECTORSERVER_NAME = dv
                 break
-            except:
+            except Exception:
                 pass
     elif not serverinfo.DOOR_NAME:
         try:
             dp = PyTango.DeviceProxy(serverinfo.SELECTORSERVER_NAME)
             dp.ping()
             serverinfo.DOOR_NAME = dp.Door
-        except:
+        except Exception:
             pass
 
     if not serverinfo.SELECTORSERVER_NAME:
@@ -82,7 +82,7 @@ def findDevices():
                 dp.ping()
                 serverinfo.DOOR_NAME = dv
                 break
-            except:
+            except Exception:
                 pass
 
     if not serverinfo.MACROSERVER_NAME:
@@ -95,7 +95,7 @@ def findDevices():
                 if serverinfo.DOOR_NAME in dl:
                     serverinfo.MACROSERVER_NAME = dv
                     break
-            except:
+            except Exception:
                 pass
 
 
