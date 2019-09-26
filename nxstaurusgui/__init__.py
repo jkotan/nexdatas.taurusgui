@@ -28,7 +28,7 @@ import tempfile
 import PyTango
 
 #: version of the application
-__version__ = "1.2.2"
+__version__ = "1.2.3"
 
 
 def replaceText(node, text):
@@ -160,4 +160,4 @@ config = __import__("config", globals(), locals(), [], -1)
 XML_CONFIG_DIR, XML_CONFIG = config.XML_CONFIG_DIR, config.XML_CONFIG
 # from config import XML_CONFIG_DIR, XML_CONFIG
 
-__all__ = [XML_CONFIG_DIR, XML_CONFIG]
+__all__ = ['XML_CONFIG_DIR', 'XML_CONFIG']
