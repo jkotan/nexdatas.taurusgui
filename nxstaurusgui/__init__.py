@@ -28,7 +28,7 @@ import tempfile
 import PyTango
 
 #: version of the application
-__version__ = "1.2.4"
+__version__ = "1.2.5"
 
 
 def replaceText(node, text):
