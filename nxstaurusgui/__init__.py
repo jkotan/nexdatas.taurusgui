@@ -156,8 +156,6 @@ if serverinfo.FIND:
     if newfile:
         config.XML_CONFIG = newfile
 
-config = __import__("config", globals(), locals(), [], -1)
 XML_CONFIG_DIR, XML_CONFIG = config.XML_CONFIG_DIR, config.XML_CONFIG
-# from config import XML_CONFIG_DIR, XML_CONFIG
 
 __all__ = ['XML_CONFIG_DIR', 'XML_CONFIG']
