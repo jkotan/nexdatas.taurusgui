@@ -82,7 +82,10 @@ def main():
     Qt.QCoreApplication.setAttribute(Qt.Qt.AA_X11InitThreads)
     import sys
     sys.argv.insert(1, str(nxstaurusgui.__path__[0]))
-    from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
+    try:
+        from taurus.qt.qtgui.taurusgui.taurusgui import main as tmain
+    except Exception:
+        from taurus.qt.qtgui.taurusgui.taurusgui import gui_cmd as tmain
     try:
         serverinfo.FIND = True
         tmain()

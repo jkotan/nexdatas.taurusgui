@@ -145,6 +145,8 @@ def changeXML(ifile):
             f = open(serverinfo.TMPFILE, 'w')
         else:
             f = tempfile.NamedTemporaryFile(delete=False)
+        if hasattr(clxml, "encode"):
+            clxml = clxml.encode('utf-8')
         f.write(clxml)
         f.close()
         serverinfo.TMPFILE = f.name
