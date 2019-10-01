@@ -1,4 +1,8 @@
 2019-10-01 Jan Kotanski <jankotan@gmail.com>
+	* add support for python3 and taurus 4.6
+	* tagged as 1.2.5
+
+2019-10-01 Jan Kotanski <jankotan@gmail.com>
 	* clean the code
 	* tagged as 1.2.4
 

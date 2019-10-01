@@ -28,7 +28,7 @@ import tempfile
 import PyTango
 
 #: version of the application
-__version__ = "1.2.4"
+__version__ = "1.2.5"
 
 
 def replaceText(node, text):
@@ -145,6 +145,8 @@ def changeXML(ifile):
             f = open(serverinfo.TMPFILE, 'w')
         else:
             f = tempfile.NamedTemporaryFile(delete=False)
+        if hasattr(clxml, "encode"):
+            clxml = clxml.encode('utf-8')
         f.write(clxml)
         f.close()
         serverinfo.TMPFILE = f.name
