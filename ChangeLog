@@ -1,3 +1,7 @@
+2019-10-01 Jan Kotanski <jankotan@gmail.com>
+	* clean the code
+	* tagged as 1.2.4
+
 2019-09-26 Jan Kotanski <jankotan@gmail.com>
 	* fix for __all__ content
 	* tagged as 1.2.3
