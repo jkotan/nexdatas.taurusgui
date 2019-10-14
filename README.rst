@@ -76,6 +76,33 @@ and
 
 for NeXus recorder.
 
+From pip
+^^^^^^^^
+
+To install it from pip you need also to install pyqt5, e.g.
+
+.. code-block:: console
+
+   $ python3 -m venv myvenv
+   $ . myvenv/bin/activate
+
+   $ pip install pyqt5
+
+   $ pip install sardana-nxsrecorder
+
+Moreover it is also good to install
+
+.. code-block:: console
+
+   $ pip install pytango
+   $ pip install sardana
+   $ pip install nxswriter
+   $ pip install nxsrecselector
+   $ pip install nxsconfigserver
+   $ pip install nxstools
+   $ pip install pymysqldb
+
+
 -------------------
 Setting environment
 -------------------
