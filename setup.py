@@ -20,13 +20,19 @@
 """ setup.py for setting NeXus MacroGUI """
 
 import os
-# import sys
+import sys
+from setuptools import setup
 # from distutils.util import get_platform
-from distutils.core import setup
+# from distutils.core import setup
 # from distutils.command.build import build
 # from distutils.command.clean import clean
 # from distutils.command.install_scripts import install_scripts
-from sphinx.setup_command import BuildDoc
+
+try:
+    from sphinx.setup_command import BuildDoc
+except Exception:
+    BuildDoc = None
+
 
 #: package name
 TOOL = "nxstaurusgui"
@@ -44,6 +50,21 @@ def read(fname):
     """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+needs_pytest = set(['test']).intersection(sys.argv)
+pytest_runner = ['pytest-runner'] if needs_pytest else []
+
+install_requires = [
+    'nxselector',
+    'taurus',
+    # 'nxsrecselector',
+    # 'pyqt5',
+    # 'pytango',
+    # 'sardana',
+    # 'nxswriter',
+    # 'nxstools',
+    # 'nxsconfigserver',
+    # 'pymysqldb',
+]
 
 #: scripts
 SCRIPTS = ['nxsmacrogui']
@@ -66,7 +87,9 @@ SETUPDATA = dict(
     maintainer="Jan Kotanski",
     maintainer_email="jankotan@gmail.com",
     description=("NXSelector MacroGUI for taurusgui"),
-    license=read('COPYRIGHT'),
+    # license=read('COPYRIGHT'),
+    install_requires=install_requires,
+    license="GNU GENERAL PUBLIC LICENSE, version 3",
     keywords="configuration scan nexus sardana recorder tango component data",
     url="https://github.com/jkotan/nexdatas",
     platforms=("Linux"),
@@ -74,6 +97,22 @@ SETUPDATA = dict(
     scripts=SCRIPTS,
     package_data=package_data,
     cmdclass={'build_sphinx': BuildDoc},
+    zip_safe=False,
+    setup_requires=pytest_runner,
+    tests_require=['pytest'],
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering :: Physics',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
     command_options={
         'build_sphinx': {
             'project': ('setup.py', name),

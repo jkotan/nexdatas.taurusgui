@@ -1,3 +1,7 @@
+2019-10-14 Jan Kotanski <jankotan@gmail.com>
+	* switch to setuptools
+	* tagged as 1.2.6
+
 2019-10-01 Jan Kotanski <jankotan@gmail.com>
 	* add support for python3 and taurus 4.6
 	* tagged as 1.2.5
