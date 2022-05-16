@@ -111,13 +111,15 @@ else
 fi
 if [ "$?" != "0" ]; then exit 255; fi
 
+docker exec --user root ndts chown -R tango:tango .
 if [[ $2 == "2" ]]; then
     echo "install nxstaurusgui"
-    docker exec  --user root ndts python setup.py -q install
+    docker exec  ndts python setup.py build
+    docker exec --user root ndts python setup.py  install
 else
     echo "install nxstaurusgui3"
-    docker exec  --user root ndts python3 setup.py -q install
+    docker exec  ndts python3 setup.py build
+    docker exec --user root ndts python3 setup.py  install
 fi
 if [ "$?" != "0" ]; then exit 255; fi
 			  
-docker exec  --user root ndts chown -R tango:tango .
