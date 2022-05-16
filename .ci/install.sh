@@ -1,48 +1,43 @@
 #!/usr/bin/env bash
 
-# workaround for incomatibility of default ubuntu 16.04 and tango configuration
-if [[ $1 == "ubuntu16.04" ]]; then
-    docker exec  --user root ndts sed -i "s/\[mysqld\]/\[mysqld\]\nsql_mode = NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION/g" /etc/mysql/mysql.conf.d/mysqld.cnf
-fi
-if [ $1 = "ubuntu20.04" ]; then
-    docker exec  --user root ndts sed -i "s/\[mysql\]/\[mysqld\]\nsql_mode = NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION\ncharacter_set_server=latin1\ncollation_server=latin1_swedish_ci\n\[mysql\]/g" /etc/mysql/mysql.conf.d/mysql.cnf
-fi
-
-echo "restart mysql"
-if [[ $1 == "debian9" ]]; then
-    # workaround for a bug in debian9, i.e. starting mysql hangs
-    docker exec  --user root ndts service mysql stop
-    docker exec  --user root ndts /bin/sh -c '$(service mysql start &) && sleep 30'
+# workaround for a bug in debian9, i.e. starting mysql hangs
+if [ "$1" = "debian11" ]; then
+    docker exec --user root ndts service mariadb restart
 else
-    docker exec  --user root ndts service mysql restart
+    docker exec --user root ndts service mysql stop
+    if [ "$1" = "ubuntu20.04" ] || [ "$1" = "ubuntu20.10" ] || [ "$1" = "ubuntu21.04" ] || [ "$1" = "ubuntu22.04" ]; then
+	docker exec --user root ndts /bin/bash -c 'usermod -d /var/lib/mysql/ mysql'
+    fi
+    docker exec --user root ndts service mysql start
+    # docker exec  --user root ndts /bin/bash -c '$(service mysql start &) && sleep 30'
 fi
 
 docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y   tango-db tango-common; sleep 10'
-if [ "$?" -ne "0" ]
-then
-    exit -1
+if [ "$?" != "0" ]; then exit 255; fi
+
+if [ "$1" = "ubuntu20.04" ] || [ "$1" = "ubuntu20.10" ] || [ "$1" = "ubuntu21.04" ] || [ "$1" = "ubuntu21.10" ] || [ "$1" = "ubuntu22.04" ]; then
+    # docker exec  --user tango ndts /bin/bash -c '/usr/lib/tango/DataBaseds 2 -ORBendPoint giop:tcp::10000  &'
+    docker exec  --user root ndts /bin/bash -c 'echo -e "[client]\nuser=root\npassword=rootpw" > /root/.my.cnf'
+    docker exec  --user root ndts /bin/bash -c 'echo -e "[client]\nuser=tango\nhost=127.0.0.1\npassword=rootpw" > /var/lib/tango/.my.cnf'
 fi
+docker exec  --user root ndts service tango-db restart
 
 docker exec  --user root ndts /bin/bash -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y xvfb  libxcb1 libx11-xcb1 libxcb-keysyms1 libxcb-image0 libxcb-icccm4 libxcb-render-util0 xkb-data'
-if [ "$?" -ne "0" ]; then exit -1; fi
+if [ "$?" -ne "0" ]; then exit 255; fi
 
 docker exec  --user root ndts mkdir -p /tmp/runtime-tango
 docker exec  --user root ndts chown -R tango:tango /tmp/runtime-tango
 
-if [ "$?" -ne "0" ]; then exit -1; fi
+if [ "$?" -ne "0" ]; then exit 255; fi
 echo "start Xvfb :99 -screen 0 1024x768x24 &"
 docker exec  --user root ndts /bin/bash -c 'export DISPLAY=":99.0"; Xvfb :99 -screen 0 1024x768x24 &'
-if [ "$?" -ne "0" ]; then exit -1; fi
+if [ "$?" -ne "0" ]; then exit 255; fi
 
 
 echo "install tango servers"
 docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y  tango-starter tango-test liblog4j1.2-java git'
-if [ "$?" -ne "0" ]
-then
-    exit -1
-fi
+if [ "$?" != "0" ]; then exit 255; fi
 
-docker exec  --user root ndts service tango-db restart
 docker exec  --user root ndts service tango-starter restart
 
 
@@ -58,17 +53,13 @@ else
 	docker exec  --user root ndts /bin/sh -c 'cd itango-src; git checkout tags/v0.1.7 -b b0.1.7; python3 setup.py install'
 	# docker exec  --user root ndts /bin/sh -c 'cd taurus-src; git checkout; python3 setup.py install'
     fi
-    if [ $1 = "ubuntu20.04" ]; then
+    if [ "$1" = "ubuntu20.04" ] || [ "$1" = "ubuntu20.04" ]; then
 	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get install -y git python3-six python3-numpy graphviz python3-sphinx g++ build-essential python3-dev pkg-config python3-all-dev  python3-setuptools libtango-dev python3-setuptools python3-tango python3-tz python3-enum34 python3ango; apt-get -qq install -y nxsconfigserver-db; sleep 10'
     else
 	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get install -y git python3-six python3-numpy graphviz python3-sphinx g++ build-essential python3-dev pkg-config python3-all-dev  python3-setuptools libtango-dev python3-setuptools python3-pytango python3-tz python3-enum34 python3ango; apt-get -qq install -y nxsconfigserver-db; sleep 10'
     fi
     docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get install -y libboost-python-dev libboost-dev python3-h5py python3-qtpy  python3-click python3-setuptools  python3-pint'
-    if [[ $1 == "debian10" ]]; then
-	echo " "
-    elif [[ $1 == "debian11" ]]; then
-	echo " "
-    elif [[ $1 == "ubuntu20.04" ]]; then
+    if [ "$1" = "debian10" ] || [ "$1" = "debian11" ] || [ "$1" = "ubuntu20.04" ]|| [ "$1" = "ubuntu22.04" ]; then
 	echo " "
     else
 	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get install -y libtango-dev python3-dev'
@@ -76,17 +67,11 @@ else
 	docker exec  --user root ndts /bin/sh -c 'cd pytango; python3 setup.py install'
     fi
 fi
-if [ "$?" -ne "0" ]
-then
-    exit -1
-fi
+if [ "$?" != "0" ]; then exit 255; fi
 
 echo "install qt5"
 docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y  qtbase5-dev-tools'
-if [ "$?" -ne "0" ]
-then
-    exit -1
-fi
+if [ "$?" != "0" ]; then exit 255; fi
 
 if [[ $1 == "debian8" ]]; then
     if [[ $2 == "3" ]]; then
@@ -114,7 +99,7 @@ if [[ $2 == "2" ]]; then
 else
     echo "install sardana, taurus and nexdatas"
     docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get install -y  nxsconfigserver-db; sleep 10; apt-get -qq install -y python3-nxsconfigserver python3-nxswriter python3-nxstools python3-nxsrecselector python3-setuptools nxsrecselector3 nxswriter3 nxsconfigserver3 nxstools3 python3-packaging'
-    if [[ $1 == "ubuntu20.04" ]]; then
+    if [[ "$1" = "ubuntu20.04" ]] || [ "$1" = "ubuntu22.04" ]; then
 	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y python3-taurus python3-sardana nxselector python3-nxselector'
     else
 	docker exec  --user root ndts /bin/sh -c 'git clone https://gitlab.com/taurus-org/taurus taurus-src; cd taurus-src'
@@ -124,21 +109,17 @@ else
 	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y nxselector3 python3-nxselector'
     fi
 fi
-if [ "$?" -ne "0" ]
-then
-    exit -1
-fi
+if [ "$?" != "0" ]; then exit 255; fi
 
+docker exec --user root ndts chown -R tango:tango .
 if [[ $2 == "2" ]]; then
     echo "install nxstaurusgui"
-    docker exec  --user root ndts python setup.py -q install
+    docker exec  ndts python setup.py build
+    docker exec --user root ndts python setup.py  install
 else
     echo "install nxstaurusgui3"
-    docker exec  --user root ndts python3 setup.py -q install
+    docker exec  ndts python3 setup.py build
+    docker exec --user root ndts python3 setup.py  install
 fi
-if [ "$?" -ne "0" ]
-then
-    exit -1
-fi
-
-docker exec  --user root ndts chown -R tango:tango .
+if [ "$?" != "0" ]; then exit 255; fi
+			  
