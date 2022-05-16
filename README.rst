@@ -1,6 +1,30 @@
 Welcome to nxstaurusgui's documentation!
 ========================================
 
+
+|github workflow|
+|docs|
+|Pypi Version|
+|Python Versions|
+
+.. |github workflow| image:: https://github.com/nexdatas/taurusgui/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/nexdatas/taurusgui/actions
+   :alt:
+
+.. |docs| image:: https://img.shields.io/badge/Documentation-webpages-ADD8E6.svg
+   :target: https://nexdatas.github.io/taurusgui/index.html
+   :alt:
+
+.. |Pypi Version| image:: https://img.shields.io/pypi/v/nxstaurusgui.svg
+                  :target: https://pypi.python.org/pypi/nxstaurusgui
+                  :alt:
+
+.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/nxstaurusgui.svg
+                     :target: https://pypi.python.org/pypi/nxstaurusgui/
+                     :alt:
+
+
+
 Authors: Jan Kotanski
 
 NXS TaurusGUI is taurusgui Configuration for Component Selector
