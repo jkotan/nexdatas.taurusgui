@@ -7,12 +7,12 @@ Welcome to nxstaurusgui's documentation!
 |Pypi Version|
 |Python Versions|
 
-.. |github workflow| image:: https://github.com/nexdatas/taurusgui/actions/workflows/tests.yml/badge.svg
-   :target: https://github.com/nexdatas/taurusgui/actions
+.. |github workflow| image:: https://github.com/nexdatas/nxsmacrogui/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/nexdatas/nxsmacrogui/actions
    :alt:
 
 .. |docs| image:: https://img.shields.io/badge/Documentation-webpages-ADD8E6.svg
-   :target: https://nexdatas.github.io/taurusgui/index.html
+   :target: https://nexdatas.github.io/nxsmacrogui/index.html
    :alt:
 
 .. |Pypi Version| image:: https://img.shields.io/pypi/v/nxstaurusgui.svg
@@ -27,14 +27,14 @@ Welcome to nxstaurusgui's documentation!
 
 Authors: Jan Kotanski
 
-NXS TaurusGUI is taurusgui Configuration for Component Selector
+NXS MacroGUI is taurus gui Configuration for Component Selector
 
 .. figure:: png/nxstaurusgui.png
    :alt: NeXus Taurus GUI
 
 
-| Source code: https://github.com/nexdatas/taurusgui/
-| Web page: https://nexdatas.github.io/taurusgui/
+| Source code: https://github.com/nexdatas/nxsmacrogui/
+| Web page: https://nexdatas.github.io/nxsmacrogui/
 | NexDaTaS Web page: https://nexdatas.github.io
 
 
@@ -52,7 +52,7 @@ From sources
 
 Download the latest version of NeXuS Configuration Server from
 
-|    https://github.com/nexdatas/taurusgui/
+|    https://github.com/nexdatas/nxsmacrogui/
 
 Extract the sources and run
 
