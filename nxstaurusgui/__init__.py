@@ -25,7 +25,11 @@ from . import serverinfo
 from . import config
 from xml.dom import minidom
 import tempfile
-import PyTango
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 #: version of the application
 __version__ = "1.2.6"
@@ -49,13 +53,13 @@ def findDevices():
     find NXS and Sardana devices and store them in
     :class:`nxstaurusgui.serverinfo`
     """
-    db = PyTango.Database()
+    db = tango.Database()
     if not serverinfo.SELECTORSERVER_NAME:
         dvs = db.get_device_exported_for_class("NXSRecSelector")
 
         for dv in dvs:
             try:
-                dp = PyTango.DeviceProxy(dv)
+                dp = tango.DeviceProxy(dv)
                 dp.ping()
                 if not serverinfo.DOOR_NAME:
                     serverinfo.DOOR_NAME = dp.Door
@@ -65,7 +69,7 @@ def findDevices():
                 pass
     elif not serverinfo.DOOR_NAME:
         try:
-            dp = PyTango.DeviceProxy(serverinfo.SELECTORSERVER_NAME)
+            dp = tango.DeviceProxy(serverinfo.SELECTORSERVER_NAME)
             dp.ping()
             serverinfo.DOOR_NAME = dp.Door
         except Exception:
@@ -78,7 +82,7 @@ def findDevices():
 
         for dv in dvs:
             try:
-                dp = PyTango.DeviceProxy(dv)
+                dp = tango.DeviceProxy(dv)
                 dp.ping()
                 serverinfo.DOOR_NAME = dv
                 break
@@ -89,7 +93,7 @@ def findDevices():
         dvs = db.get_device_exported_for_class("MacroServer")
         for dv in dvs:
             try:
-                dp = PyTango.DeviceProxy(dv)
+                dp = tango.DeviceProxy(dv)
                 dp.ping()
                 dl = dp.DoorList
                 if serverinfo.DOOR_NAME in dl:
