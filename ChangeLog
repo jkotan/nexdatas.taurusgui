@@ -1,3 +1,8 @@
+2023-08-03 Jan Kotanski <jankotan@gmail.com>
+	* change to python argparse
+	* add first tests
+	* tagged as 1.3.0
+
 2019-10-14 Jan Kotanski <jankotan@gmail.com>
 	* switch to setuptools
 	* tagged as 1.2.6
