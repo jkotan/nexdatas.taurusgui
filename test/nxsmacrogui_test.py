@@ -60,7 +60,7 @@ def myinput(w, text):
 
 
 # test fixture
-class NXSSelectorTest(unittest.TestCase):
+class NXSMacroGUITest(unittest.TestCase):
 
     # constructor
     # \param methodName name of the test method
