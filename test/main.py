@@ -63,7 +63,7 @@ try:
 except Exception as e:
     H5CPP_AVAILABLE = False
     print("h5cpp is not available: %s" % e)
-    
+
 
 if not PNI_AVAILABLE and not H5PY_AVAILABLE and not H5CPP_AVAILABLE:
     raise Exception("Please install h5py, h5cpp or pni")
