@@ -58,12 +58,12 @@ Extract the sources and run
 
 .. code-block:: console
 
-	  $ python setup.py install
+	  $ python3 setup.py install
 
 Debian packages
 ^^^^^^^^^^^^^^^
 
-Debian Bookworm, Bullseye, Buster and  Ubuntu Lunar, Jammy, Focal  packages can be found in the HDRI repository.
+Debian Bookworm, Bullseye, Buster and  Ubuntu Oracular, Lunar, Jammy  packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
@@ -201,7 +201,7 @@ If the `RecoderPath` property of MacroServer is not set one can do it by
 
 .. code-block:: console
 
-	  $ nxsetup add-recorder-path  /usr/lib/python2.7/dist-packages/sardananxsrecorder
+	  $ nxsetup add-recorder-path  /usr/lib/python3/dist-packages/sardananxsrecorder
 
 where the path should point the `sardananxsrecorder` package.
 
